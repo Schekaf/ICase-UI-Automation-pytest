@@ -3,6 +3,12 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser", action="store", default="chrome", help="Browser to run tests on: chrome or firefox"
+    )
+
+
 def get_driver(browser_name):
     if browser_name == "chrome":
         options = ChromeOptions()

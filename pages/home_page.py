@@ -9,8 +9,8 @@ class HomePage:
     company = (By.XPATH, "//*[@id='navbarDropdownMenuLink' and contains(text(), 'Company')]")
     company_careers = (By.XPATH, "//*[@class='dropdown-sub' and contains(text(), 'Careers')]")
 
-    def expand_company(self, company):
-        pass
+    def click_company(self):
+        self.driver.find_element(*self.company).click()
 
-    def click_company_careers(self, company_careers):
-        pass
+    def click_company_careers(self):
+        self.driver.find_element(*self.company_careers).click()

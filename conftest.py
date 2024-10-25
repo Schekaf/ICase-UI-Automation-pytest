@@ -1,5 +1,6 @@
 import pytest
 from utils.browser import get_driver
+from utils.common import Common
 
 
 def pytest_addoption(parser):
@@ -9,9 +10,10 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope="function")
-def setup(request):
+def driver(request):
     browser_name = request.config.getoption("--browser")
     driver = get_driver(browser_name)  # Initialize the WebDriver based on the browser name
+    request.common = Common(driver)
     driver.get("https://useinsider.com/")
     yield driver
     driver.quit()

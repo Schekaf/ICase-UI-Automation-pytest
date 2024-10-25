@@ -19,6 +19,7 @@ class QualityAssurancePage(Common):
     location_list = (By.XPATH, "//ul[contains(@class, 'select2-results__options')]")
     job_list = (By.ID, "jobs-list")
     job_list_items = (By.XPATH, "//div[@id='jobs-list']/div[contains(@class, 'position-list-item')]")
+    bottom_pagination = (By.ID, 'pagination')
 
     def click_on_quality_assurance(self):
         self.scroll(self.careers_jobs_product_design)
@@ -69,6 +70,20 @@ class QualityAssurancePage(Common):
             return None
         return self.driver.find_elements(*self.job_list_items)
 
+    def get_job(self, position, department, location):
+        job_items = self.get_all_jobs()
+        for job in job_items:
+            position_title = job.find_element(By.CLASS_NAME, "position-title").text
+            department_title = job.find_element(By.CLASS_NAME, "position-department").text
+            location_title = job.find_element(By.CLASS_NAME, "position-location").text
+            if (
+                    position == position_title and
+                    department == department_title and
+                    location == location_title
+            ):
+                return job
+        return None
+
     def check_all_job_criteria(self, position, department, location):
         job_items = self.get_all_jobs()
         for job in job_items:
@@ -82,6 +97,15 @@ class QualityAssurancePage(Common):
             ):
                 return False
         return True
+
+    def click_on_view_role(self, position, department, location):
+        element = self.get_job(position, department, location)
+        view_role_button = element.find_element(By.XPATH, "//*[text()='View Role']")
+        self.scroll(self.bottom_pagination)
+        self.hover_on_element(view_role_button)
+        WebDriverWait(self.driver, 10).until(EC.visibility_of(view_role_button))
+        view_role_button.click()
+
 
 
 

@@ -25,7 +25,14 @@ class CareersPage:
                  "Partner Support Development",
                  "Product Design"
                  ]
-    locations_list = ['New York\nUS', 'Sao Paulo\nBrazil', 'London\nUnited Kingdom', 'Paris\nFrance', 'Amsterdam\nNetherlands', 'Barcelona\nSpain', 'Helsinki\nFinland', 'Warsaw\nPoland', 'Kiev\nUkraine', 'Moscow\nRussia', 'Sydney\nAustralia', 'Dubai\nUnited Arab Emirates', 'Tokyo\nJapan', 'Seoul\nKorea', 'Singapore\nSingapore', 'Bangkok\nThailand', 'Jakarta\nIndonesia', 'Taipei\nTaiwan', 'Manila\nPhilippines', 'Kuala Lumpur\nMalaysia', 'Ho Chi Minh City\nVietnam', 'Istanbul\nTurkey', 'Ankara\nTurkey', 'Mexico City\nMexico', 'Lima\nPeru', 'Buenos Aires\nArgentina', 'Bogota\nColombia', 'Santiago\nChile']
+    locations_list = ['New York\nUS', 'Sao Paulo\nBrazil', 'London\nUnited Kingdom', 'Paris\nFrance',
+                      'Amsterdam\nNetherlands', 'Barcelona\nSpain', 'Helsinki\nFinland', 'Warsaw\nPoland',
+                      'Kiev\nUkraine', 'Moscow\nRussia', 'Sydney\nAustralia', 'Dubai\nUnited Arab Emirates',
+                      'Tokyo\nJapan', 'Seoul\nKorea', 'Singapore\nSingapore', 'Bangkok\nThailand', 'Jakarta\nIndonesia',
+                      'Taipei\nTaiwan', 'Manila\nPhilippines', 'Kuala Lumpur\nMalaysia', 'Ho Chi Minh City\nVietnam',
+                      'Istanbul\nTurkey', 'Ankara\nTurkey', 'Mexico City\nMexico', 'Lima\nPeru',
+                      'Buenos Aires\nArgentina', 'Bogota\nColombia', 'Santiago\nChile']
+    careerss_see_all_jobs = (By.XPATH, "//*[contains(@class, 'btn btn') and text()='See all teams']")
     careers_jobs = (By.XPATH, "//*[contains(@class, 'job-title')]")
     careers_locations = (By.XPATH, "//*[contains(@class, 'location-info')]")
     careers_locations_move_right = (By.XPATH, "//*[contains(@class,'icon-arrow-right')]")
@@ -51,3 +58,18 @@ class CareersPage:
             progress_bar = self.driver.find_element(*self.careers_location_progress_bar)
             progress = float(progress_bar.get_attribute('style').replace('width: ', '').replace('%;', ''))
         return actual_locations
+
+    def get_teams(self, count_teams: int = 15) -> [str]:
+        actual_teams = []
+        WebDriverWait(self.driver, 10).until(lambda driver: len(driver.find_elements(*self.careers_jobs)) >= count_teams)
+        elements = self.driver.find_elements(*self.careers_jobs)
+        for element in elements:
+            actual_teams.append(element.text)
+        return actual_teams
+
+    def click_see_all_jobs(self):
+        self.driver.find_element(*self.careerss_see_all_jobs).click()
+
+    def scroll(self, locator: tuple):
+        element = self.driver.find_element(*locator)
+        ActionChains(self.driver).move_to_element(element).perform()

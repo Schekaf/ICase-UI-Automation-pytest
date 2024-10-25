@@ -42,7 +42,7 @@ class CareersPage:
         # Scroll to the element
         ActionChains(self.driver).move_to_element(progress_bar).perform()
         progress = 0
-        while progress < 60:
+        while progress < 100:
             elements = self.driver.find_elements(*self.careers_locations)
             for element in elements:
                 if not element.text in actual_locations and element.text != '' and "\n" in element.text:

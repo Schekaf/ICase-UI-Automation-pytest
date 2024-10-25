@@ -13,7 +13,8 @@ def pytest_addoption(parser):
 def driver(request):
     browser_name = request.config.getoption("--browser")
     driver = get_driver(browser_name)  # Initialize the WebDriver based on the browser name
-    request.common = Common(driver)
     driver.get("https://useinsider.com/")
     yield driver
     driver.quit()
+
+

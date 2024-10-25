@@ -3,10 +3,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utils.common import Common
 
-class CareersPage:
-    def __init__(self, driver):
-        self.driver = driver
+
+class CareersPage(Common):
 
     # Locators
     jobs_list = ["Customer Success",
@@ -37,7 +37,7 @@ class CareersPage:
     careers_locations = (By.XPATH, "//*[contains(@class, 'location-info')]")
     careers_locations_move_right = (By.XPATH, "//*[contains(@class,'icon-arrow-right')]")
     careers_location_progress_bar = (By.XPATH, "//*[@class='progress']")
-    careers_life_at_Insider = (By.XPATH, "//*[@data-id='21cea83']")
+    careers_life_at_Insider = (By.XPATH, "//h2[text()='Life at Insider']/ancestor::div[contains(@class, 'elementor-column')]")
 
     def wait_careers_page_to_be_loaded(self):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.careers_jobs))
@@ -70,6 +70,13 @@ class CareersPage:
     def click_see_all_jobs(self):
         self.driver.find_element(*self.careerss_see_all_jobs).click()
 
-    def scroll(self, locator: tuple):
-        element = self.driver.find_element(*locator)
-        ActionChains(self.driver).move_to_element(element).perform()
+
+
+    def is_life_at_insider_block_open(self):
+        try:
+            # Wait until the "Life at Insider" block is present in the DOM and visible
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.careers_life_at_Insider))
+            return True
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            return False

@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 
+from utils.common import Common
 
-class OpenPositionsPage:
-    def __init__(self, driver):
-        self.driver = driver
+
+class OpenPositionsPage(Common):
 
     # Locators
     filter_by_location = (By.ID, "select2-filter-by-location-container")

@@ -2,10 +2,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utils.common import Common
 
-class HomePage:
-    def __init__(self, driver):
-        self.driver = driver
+
+class HomePage(Common):
 
     # Locators
     title = "#1 Leader in Individualized, Cross-Channel CX — Insider"

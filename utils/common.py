@@ -19,3 +19,6 @@ class Common:
         except Exception as e:
             print(f"Error occurred: {e}")
             return False
+
+    def hover_on_element(self, element):
+        ActionChains(self.driver).move_to_element(element).perform()

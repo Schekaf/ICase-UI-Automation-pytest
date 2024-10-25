@@ -6,8 +6,11 @@ class HomePage:
         self.driver = driver
 
     # Locators
+    title = "#1 Leader in Individualized, Cross-Channel CX — Insider"
+    logo = (By.XPATH, "//*[@alt='insider_logo']")
     company = (By.XPATH, "//*[@id='navbarDropdownMenuLink' and contains(text(), 'Company')]")
     company_careers = (By.XPATH, "//*[@class='dropdown-sub' and contains(text(), 'Careers')]")
+
 
     def click_company(self):
         self.driver.find_element(*self.company).click()

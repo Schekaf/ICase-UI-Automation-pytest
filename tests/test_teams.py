@@ -1,5 +1,3 @@
-import time
-
 from pages.home_page import HomePage
 from pages.careers_page import CareersPage
 

@@ -13,7 +13,7 @@ class HomePage:
     company = (By.XPATH, "//*[@id='navbarDropdownMenuLink' and contains(text(), 'Company')]")
     company_careers = (By.XPATH, "//*[@class='dropdown-sub' and contains(text(), 'Careers')]")
 
-    def wait_logo_to_be_loaded(self):
+    def wait_home_page_to_be_loaded(self):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.logo))
 
     def click_company(self):

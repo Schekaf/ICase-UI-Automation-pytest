@@ -106,6 +106,12 @@ class QualityAssurancePage(Common):
         WebDriverWait(self.driver, 10).until(EC.visibility_of(view_role_button))
         view_role_button.click()
 
+    def is_redirected_on_lever(self) -> bool:
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        WebDriverWait(self.driver, 10).until(EC.url_contains('jobs.lever.co/useinsider'))
+        return "lever.co" in self.driver.current_url
+
+
 
 
 

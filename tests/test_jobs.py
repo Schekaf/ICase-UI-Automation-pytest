@@ -56,3 +56,5 @@ def test_5_view_role(driver):
     quality_assurance.select_department("Quality Assurance")
     quality_assurance.click_on_view_role("Senior Software Quality Assurance Engineer", "Quality Assurance",
                                          "Istanbul, Turkey")
+    assert quality_assurance.is_redirected_on_lever()
+

@@ -2,7 +2,7 @@ from pages.home_page import HomePage
 from pages.careers_page import CareersPage
 
 
-def test_career_locations(driver):
+def test_2_0_career_locations(driver):
     home_page = HomePage(driver)
     home_page.wait_home_page_to_be_loaded()
     home_page.click_company()

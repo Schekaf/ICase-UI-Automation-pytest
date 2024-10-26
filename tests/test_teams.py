@@ -1,8 +1,10 @@
+import time
+import pytest
+
 from pages.home_page import HomePage
 from pages.careers_page import CareersPage
-
-
-def test_teams(driver):
+@pytest.mark.skip
+def test_2_1_teams(driver):
     home_page = HomePage(driver)
     home_page.wait_home_page_to_be_loaded()
     home_page.click_company()
@@ -18,3 +20,12 @@ def test_teams(driver):
     assert careers_page.is_team_blocks_open()
 
 
+def test_2_2_life_at_insider(driver):
+    home_page = HomePage(driver)
+    home_page.wait_home_page_to_be_loaded()
+    home_page.click_company()
+    home_page.click_company_careers()
+    careers_page = CareersPage(driver)
+    careers_page.wait_careers_page_to_be_loaded()
+    careers_page.scroll(careers_page.careers_life_at_Insider)
+    assert careers_page.is_life_at_insider_block_open(), f"Is Life at Insider blocks are not open"

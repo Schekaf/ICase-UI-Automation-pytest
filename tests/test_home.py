@@ -3,7 +3,7 @@
 from pages.home_page import HomePage
 
 
-def test_open_home_page(driver):
+def test_1_open_home_page(driver):
     home_page = HomePage(driver)
     # Check Home Page Title
     actual_title = driver.title

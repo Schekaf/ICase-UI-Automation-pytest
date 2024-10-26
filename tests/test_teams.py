@@ -1,9 +1,7 @@
-import time
-import pytest
-
 from pages.home_page import HomePage
 from pages.careers_page import CareersPage
-@pytest.mark.skip
+
+
 def test_2_1_teams(driver):
     home_page = HomePage(driver)
     home_page.wait_home_page_to_be_loaded()

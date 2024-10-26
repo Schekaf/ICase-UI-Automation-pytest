@@ -1,4 +1,4 @@
-# Pytest Selenium Framework for Web Automation
+# Pytest Selenium Framework for Insider Web Automation
 
 ## Overview
 
